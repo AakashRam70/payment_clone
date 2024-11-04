@@ -4,7 +4,7 @@ const zodSigupValidation = zod.object({
     username: zod.string().email(),
     password: zod.string().min(4, { message: "Minimum 4 character Required" }).max(20, { message: "Maximum 20 Characters Required" }),
     firstName: zod.string(),
-    llastName: zod.string()
+    lastName: zod.string()
 })
 
 const zodSiginValidation = zod.object({

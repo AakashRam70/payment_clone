@@ -3,17 +3,18 @@ const jwt = require("jsonwebtoken");
 const { User, Account } = require("../db")
 const { zodSigupValidation, zodSiginValidation, updateBody } = require("../zod");
 const { JWT_SECRET } = require("../config");
+const authMiddleware = require("../middleware");
 const router = express.Router();
 
 router.post("/signup", async (req, res) => {
-    const { success } = zodSigupValidation.safeParseAsync(req.body);
+    const { success } = zodSigupValidation.safeParse(req.body);
     if (!success) {
         return res.status(411).json({
             message: "Email already taken / Incorrect inputs"
         })
     }
 
-    const existingUser = await UserActivation.findOne({
+    const existingUser = await User.findOne({
         username: req.body.username
     })
 

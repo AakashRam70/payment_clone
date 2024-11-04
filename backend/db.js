@@ -9,7 +9,7 @@ mongoose
         console.log(err, "Connection Error..")
     })
 
-const userSchema = new mongoose.schema({
+const userSchema = mongoose.Schema({
     username: {
         type: String,
         require: true
@@ -28,9 +28,9 @@ const userSchema = new mongoose.schema({
     }
 })
 
-const modelSchema = mongoose.model("User", userSchema);
+const User = mongoose.model("User", userSchema);
 
-const accountSchema = new mongoose.Schema({
+const accountSchema = mongoose.Schema({
     userId: {
         type: mongoose.Schema.Types.ObjectId, // Reference to User model
         ref: 'User',
@@ -45,6 +45,6 @@ const accountSchema = new mongoose.Schema({
 const Account = mongoose.model('Account', accountSchema);
 
 module.exports = {
-    modelSchema,
+    User,
     Account
 }
