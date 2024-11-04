@@ -1,5 +1,6 @@
+
 const express = require("express");
 
+const router = express.Router();
 
-
-module.exports = user;
+module.exports = router;

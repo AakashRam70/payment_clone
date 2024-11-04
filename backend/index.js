@@ -1,9 +1,13 @@
 const express = require("express");
-const mainRouter = require("./routes/index");
+const mainRouter = require("./routes/index")
+const cors = require('cors');
+const json = require("jsonwebtoken");
 const app = express();
 
-app.use("/api/v1", mainRouter);
+app.use(mainRouter);
+app.use(express.json());
+app.use(cors());
 
 app.listen(3001, () => {
-    console.log("Server is running");
+    console.log("Serber is Running..")
 })
