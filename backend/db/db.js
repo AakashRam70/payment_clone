@@ -17,7 +17,7 @@ const UserSchema = Schema({
         require: true,
         maxLenght: 30
     },
-    userName: {
+    username: {
         type: String,
         require: true,
         unique: true,
@@ -32,7 +32,7 @@ const UserSchema = Schema({
     }
 })
 
-const ModelSchema = mongoose.model("Users", UserSchema);
+const ModelSchema = mongoose.model("User", UserSchema);
 
 module.exports = ModelSchema;
 
