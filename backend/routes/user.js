@@ -77,21 +77,21 @@ router.post("/signin", async (req, res) => {
 
 router.put("/", authMiddleware, async (req, res) => {
     const { success } = updateBody.safeParse(req.body);
+
     if (!success) {
-        return res.status(411).json({
-            message: "Error while updating user"
+        res.status(411).json({
+            message: "Error while updating information"
         })
     }
+    await User.updateOne(req.body, { _id: req.userId })
 
-    await User.updateOne(req.body, { id: req.userId })
-    res.json({
-        message: "Updated successfully"
+    res.status(200).json({
+        message: "Updated Successfully"
     })
 })
 
 router.get("/bulk", async (req, res) => {
     const filter = req.query.filter || "";
-
     const users = await User.find({
         $or: [{
             firstName: {
@@ -111,8 +111,8 @@ router.get("/bulk", async (req, res) => {
             _id: user._id
         }))
     })
-}
-)
+})
 
-
-module.exports = router;
+module.exports = ({
+    router
+});
