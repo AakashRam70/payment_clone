@@ -79,16 +79,18 @@ router.put("/", authMiddleware, async (req, res) => {
     const { success } = updateBody.safeParse(req.body);
 
     if (!success) {
-        res.status(411).json({
+        return res.status(400).json({
             message: "Error while updating information"
-        })
+        });
     }
-    await User.updateOne(req.body, { _id: req.userId })
+
+    await User.updateOne({ _id: req.userId }, req.body);
 
     res.status(200).json({
         message: "Updated Successfully"
-    })
-})
+    });
+});
+
 
 router.get("/bulk", async (req, res) => {
     const filter = req.query.filter || "";
